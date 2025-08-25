@@ -1,536 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deploy to Vercel - Step by Step Guide</title>
-    <style>
-        :root {
-            --primary: #0070f3;
-            --primary-dark: #0051b3;
-            --secondary: #333;
-            --light: #f5f5f5;
-            --white: #ffffff;
-            --gray: #6c757d;
-            --success: #28a745;
-            --warning: #ffc107;
-            --shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--white);
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: var(--white);
-            padding: 30px 20px;
-            text-align: center;
-        }
-        
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        header p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .progress-container {
-            background: var(--light);
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .progress-steps {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 800px;
-            position: relative;
-        }
-        
-        .progress-steps::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: #ddd;
-            z-index: 1;
-        }
-        
-        .progress-bar {
-            position: absolute;
-            top: 20px;
-            left: 0;
-            height: 4px;
-            background: var(--primary);
-            z-index: 2;
-            transition: width 0.5s ease;
-        }
-        
-        .step-indicator {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 3;
-        }
-        
-        .step-circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #ddd;
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 10px;
-            border: 4px solid var(--white);
-            transition: all 0.3s ease;
-        }
-        
-        .step-circle.active {
-            background: var(--primary);
-            color: var(--white);
-        }
-        
-        .step-circle.completed {
-            background: var(--success);
-            color: var(--white);
-        }
-        
-        .step-title {
-            font-size: 0.9rem;
-            text-align: center;
-            color: var(--gray);
-        }
-        
-        .step-title.active {
-            color: var(--primary);
-            font-weight: bold;
-        }
-        
-        .content {
-            padding: 30px;
-        }
-        
-        .steps {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .step {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 20px;
-            background: var(--light);
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-        
-        .step:hover {
-            transform: translateY(-5px);
-        }
-        
-        .step-number {
-            background: var(--primary);
-            color: var(--white);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-        
-        .step-content h3 {
-            color: var(--secondary);
-            margin-bottom: 10px;
-        }
-        
-        .step-content p {
-            color: var(--gray);
-            margin-bottom: 10px;
-        }
-        
-        .code {
-            background: #272822;
-            color: #f8f8f2;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: monospace;
-            overflow-x: auto;
-            margin: 10px 0;
-        }
-        
-        .screenshot {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            margin: 10px 0;
-            border: 1px solid #ddd;
-        }
-        
-        .note {
-            background: #fff5eb;
-            padding: 15px;
-            border-left: 4px solid #f6ad55;
-            margin: 15px 0;
-            border-radius: 5px;
-        }
-        
-        .success {
-            background: #f0fff4;
-            padding: 15px;
-            border-left: 4px solid var(--success);
-            margin: 15px 0;
-            border-radius: 5px;
-        }
-        
-        .buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: var(--primary);
-            color: var(--white);
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-        
-        .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
-        }
-        
-        .btn-success {
-            background: var(--success);
-        }
-        
-        .btn-success:hover {
-            background: #218838;
-        }
-        
-        .center {
-            text-align: center;
-        }
-        
-        .completed-check {
-            color: var(--success);
-            margin-left: 10px;
-        }
-        
-        @media (max-width: 768px) {
-            .step {
-                flex-direction: column;
-            }
-            
-            .buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                text-align: center;
-            }
-            
-            .progress-steps {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-            
-            .step-indicator {
-                flex: 0 0 calc(33.333% - 15px);
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrightStar Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Roboto', Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
+
+/* Header / Banner */
+header {
+  background-image: url('banner.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px;
+  position: relative;
+}
+header::after {
+  content: "";
+  position: absolute;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.45);
+}
+header h1, header p { position: relative; z-index:1; margin:0; }
+header h1 { font-size:3em; margin-bottom:15px; }
+header p { font-size:1.2em; }
+
+/* Navigation */
+nav { display:flex; justify-content:center; background:#222; }
+nav a { color:#fff; padding:15px 20px; text-decoration:none; font-weight:700; transition:0.3s; }
+nav a:hover { background:#ff6600; color:#fff; border-radius:5px; }
+
+/* Sections */
+section { padding:50px 20px; max-width:900px; margin:30px auto; background:#fff; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+section h2 { font-size:2em; margin-bottom:20px; }
+section p { font-size:1em; line-height:1.6; }
+
+/* Contact Form */
+form label { display:block; margin-top:15px; font-weight:700; }
+form input, form textarea { width:100%; padding:12px; margin-top:5px; border:1px solid #ccc; border-radius:8px; }
+form button { margin-top:20px; padding:12px 30px; background:#ff6600; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:1em; transition:0.3s; }
+form button:hover { background:#e65c00; }
+
+/* Footer */
+footer { background:#222; color:#fff; text-align:center; padding:25px 20px; }
+footer a { color:#ffcc00; text-decoration:none; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Deploy to Vercel - Step by Step</h1>
-            <p>Follow these simple steps to get your BrightStar Solutions website live on Vercel</p>
-        </header>
-        
-        <div class="progress-container">
-            <div class="progress-steps">
-                <div class="progress-bar" id="progressBar" style="width: 16.66%;"></div>
-                
-                <div class="step-indicator">
-                    <div class="step-circle completed">1</div>
-                    <div class="step-title">GitHub Account</div>
-                </div>
-                
-                <div class="step-indicator">
-                    <div class="step-circle active">2</div>
-                    <div class="step-title active">Create Repository</div>
-                </div>
-                
-                <div class="step-indicator">
-                    <div class="step-circle">3</div>
-                    <div class="step-title">Upload Files</div>
-                </div>
-                
-                <div class="step-indicator">
-                    <div class="step-circle">4</div>
-                    <div class="step-title">Sign Up on Vercel</div>
-                </div>
-                
-                <div class="step-indicator">
-                    <div class="step-circle">5</div>
-                    <div class="step-title">Import Project</div>
-                </div>
-                
-                <div class="step-indicator">
-                    <div class="step-circle">6</div>
-                    <div class="step-title">Deploy</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="content">
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Create a GitHub Account <span class="completed-check">✓ Completed</span></h3>
-                        <p>You've already created your GitHub account. Great job!</p>
-                    </div>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Create a New Repository</h3>
-                        <p>Now let's create a repository for your website:</p>
-                        <ol>
-                            <li>Go to <a href="https://github.com/" target="_blank">github.com</a> and log in</li>
-                            <li>Click the "+" icon in the top right and select "New repository"</li>
-                            <li>Name it "brightstar-website" (or any name you prefer)</li>
-                            <li>Make sure it's set to "Public" (this is free)</li>
-                            <li>Optionally, add a description like "My BrightStar Solutions website"</li>
-                            <li>Click "Create repository"</li>
-                        </ol>
-                        <div class="note">
-                            <strong>Note:</strong> Don't initialize the repository with a README unless you're familiar with Git.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Upload Your HTML File</h3>
-                        <p>Once your repository is created, you need to upload your website files:</p>
-                        <ol>
-                            <li>In your repository, click "Add file" → "Upload files"</li>
-                            <li>Drag and drop your <code>index.html</code> file or click to select it</li>
-                            <li>Add any other files if you have them (CSS, JS, images)</li>
-                            <li>Click "Commit changes"</li>
-                        </ol>
-                        <div class="note">
-                            <strong>Important:</strong> Make sure your main file is named <code>index.html</code> (all lowercase) as this is what Vercel will look for.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Sign Up for Vercel</h3>
-                        <p>Now let's get your website deployed:</p>
-                        <ol>
-                            <li>Go to <a href="https://vercel.com/" target="_blank">vercel.com</a></li>
-                            <li>Click "Sign up" and choose "Continue with GitHub"</li>
-                            <li>Follow the authorization steps to connect your GitHub account</li>
-                            <li>Complete your profile information</li>
-                        </ol>
-                    </div>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h3>Import Your Project</h3>
-                        <p>After signing up, you'll be taken to your Vercel dashboard:</p>
-                        <ol>
-                            <li>Click "Add New" → "Project"</li>
-                            <li>You'll see a list of your GitHub repositories</li>
-                            <li>Find and select your "brightstar-website" repository</li>
-                            <li>Click "Import"</li>
-                        </ol>
-                    </div>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <h3>Deploy Your Website</h3>
-                        <p>Final step - deploy your website:</p>
-                        <ol>
-                            <li>Vercel will automatically detect your project settings</li>
-                            <li>Click "Deploy" and wait a few seconds</li>
-                            <li>Your website will be live at a URL like: <code>brightstar-website.vercel.app</code></li>
-                        </ol>
-                        <div class="success">
-                            <strong>Success!</strong> Your BrightStar Solutions website is now live on the internet!
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="note">
-                <h3>Troubleshooting Tips</h3>
-                <ul>
-                    <li>Make sure your file is named <code>index.html</code> (all lowercase)</li>
-                    <li>Check the Vercel deployment logs if you encounter any errors</li>
-                    <li>Your site will automatically redeploy when you make changes to your GitHub repository</li>
-                    <li>If you have CSS/JS in separate files, make sure the file paths are correct</li>
-                </ul>
-            </div>
-            
-            <div class="center">
-                <div class="buttons">
-                    <a href="https://github.com/new" class="btn" target="_blank">Create GitHub Repository</a>
-                    <a href="https://vercel.com/" class="btn btn-outline" target="_blank">Go to Vercel</a>
-                    <button id="nextStep" class="btn btn-success">I've Completed This Step</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        // Track progress through steps
-        let currentStep = 2;
-        const totalSteps = 6;
-        const progressBar = document.getElementById('progressBar');
-        const nextStepButton = document.getElementById('nextStep');
-        
-        function updateProgress() {
-            // Calculate progress percentage
-            const progressPercentage = (currentStep / totalSteps) * 100;
-            progressBar.style.width = `${progressPercentage}%`;
-            
-            // Update step indicators
-            document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
-                const circle = indicator.querySelector('.step-circle');
-                const title = indicator.querySelector('.step-title');
-                
-                if (index + 1 < currentStep) {
-                    circle.className = 'step-circle completed';
-                    title.className = 'step-title';
-                } else if (index + 1 === currentStep) {
-                    circle.className = 'step-circle active';
-                    title.className = 'step-title active';
-                } else {
-                    circle.className = 'step-circle';
-                    title.className = 'step-title';
-                }
-            });
-            
-            // Scroll to current step
-            document.querySelectorAll('.step')[currentStep - 1].scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-            
-            // Update button text
-            if (currentStep === totalSteps) {
-                nextStepButton.textContent = 'All Steps Completed!';
-                nextStepButton.disabled = true;
-            } else {
-                nextStepButton.textContent = `I've Completed Step ${currentStep}`;
-            }
-        }
-        
-        nextStepButton.addEventListener('click', function() {
-            if (currentStep < totalSteps) {
-                currentStep++;
-                updateProgress();
-                
-                // Update step content
-                const currentStepElement = document.querySelectorAll('.step')[currentStep - 2];
-                const heading = currentStepElement.querySelector('h3');
-                
-                if (!heading.innerHTML.includes('Completed')) {
-                    heading.innerHTML += ' <span class="completed-check">✓ Completed</span>';
-                }
-            }
-        });
-        
-        // Initialize progress
-        updateProgress();
-        
-        // Animation for steps
-        document.addEventListener('DOMContentLoaded', function() {
-            const steps = document.querySelectorAll('.step');
-            
-            steps.forEach((step, index) => {
-                step.style.opacity = '0';
-                step.style.transform = 'translateX(-20px)';
-                step.style.transition = `opacity 0.5s ease ${index * 0.2}s, transform 0.5s ease ${index * 0.2}s`;
-                
-                setTimeout(() => {
-                    step.style.opacity = '1';
-                    step.style.transform = 'translateX(0)';
-                }, 100);
-            });
-        });
-    </script>
+<header>
+<h1>Shine Bright with BrightStar Solutions</h1>
+<p>Your Path to Online Success</p>
+<p>Contact us: 📞 +1 (865) 290-0478 | ✉️ <a href="mailto:brightstarowner@gmail.com">brightstarowner@gmail.com</a></p>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#services">Our Services</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section id="services">
+<h2>Our Services</h2>
+<p>We offer virtual assistant coverage 24/7 to ensure your business stays connected and never misses a call.</p>
+</section>
+
+<section id="contact">
+<h2>Contact Us</h2>
+<p>Owner: Chris Cassidy</p>
+<p>Phone: <a href="tel:+18652900478">+1 (865) 290-0478</a></p>
+<p>Email: <a href="mailto:brightstarowner@gmail.com">brightstarowner@gmail.com</a></p>
+<form>
+<label for="name">Name</label>
+<input type="text" id="name" name="name" required>
+
+<label for="email">Email</label>
+<input type="email" id="email" name="email" required>
+
+<label for="message">Message</label>
+<textarea id="message" name="message" required></textarea>
+
+<button type="submit">Send</button>
+</form>
+</section>
+
+<footer>
+<p>&copy; 2025 BrightStar Solutions | Owner: Chris Cassidy</p>
+<p>📞 <a href="tel:+18652900478">+1 (865) 290-0478</a> | ✉️ <a href="mailto:brightstarowner@gmail.com">brightstarowner@gmail.com</a></p>
+</footer>
+
 </body>
-
 </html>
