@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrightStar Solutions - Professional Services</title>
+    <title>BrightStar Solutions - Services & Pricing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -121,19 +121,21 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         
-        /* Trust Section */
-        .trust-section {
-            background: var(--white);
+        /* Pricing Section */
+        .pricing {
             padding: 5rem 0;
-            text-align: center;
+            background: var(--white);
         }
         
         .section-title {
             font-size: 2.5rem;
             margin-bottom: 3rem;
             color: var(--primary);
+            text-align: center;
             position: relative;
             display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
         
         .section-title::after {
@@ -147,89 +149,157 @@
             background: var(--secondary);
         }
         
-        .trust-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--light);
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-        }
-        
-        .trust-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-        
-        .trust-badges {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .badge {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            width: 180px;
-            transition: var(--transition);
-        }
-        
-        .badge:hover {
-            transform: translateY(-10px);
-        }
-        
-        .badge i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .badge h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Services Section */
-        .services {
-            padding: 5rem 0;
-            background: var(--light);
-        }
-        
-        .services-grid {
+        .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
         
-        .service-card {
-            background: var(--white);
-            padding: 2rem;
+        .pricing-card {
+            background: var(--light);
             border-radius: 10px;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            text-align: center;
+            overflow: hidden;
+            position: relative;
         }
         
-        .service-card:hover {
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border: 2px solid var(--secondary);
+            z-index: 2;
+        }
+        
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 5px 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+        
+        .pricing-card:hover {
             transform: translateY(-10px);
         }
         
-        .service-card i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
         }
         
-        .service-card h3 {
+        .pricing-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .pricing-name {
             font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        
+        .pricing-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .pricing-features {
+            padding: 2rem;
+        }
+        
+        .pricing-features ul {
+            list-style: none;
+        }
+        
+        .pricing-features li {
             margin-bottom: 1rem;
-            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pricing-features i {
+            color: var(--success);
+        }
+        
+        .pricing-cta {
+            padding: 0 2rem 2rem;
+            text-align: center;
+        }
+        
+        /* Virtual Assistant Section */
+        .virtual-assistant {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+        
+        .va-container {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .va-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .va-plan {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .va-plan:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .va-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+        
+        .va-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--gray);
+        }
+        
+        .va-savings {
+            background: var(--success);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 10px;
         }
         
         /* Contact Section */
@@ -328,8 +398,12 @@
                 font-size: 2rem;
             }
             
-            .trust-content {
-                padding: 2rem;
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
             }
             
             .header-content {
@@ -356,61 +430,188 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Excellence in Every Solution</h1>
-                <p>Your trusted partner for innovative business solutions</p>
-                <a href="#contact" class="btn">Get in Touch</a>
+                <h1>Professional Web Solutions</h1>
+                <p>Competitive pricing for exceptional quality</p>
+                <a href="#contact" class="btn">Get a Free Quote</a>
             </div>
         </div>
     </section>
 
-    <!-- Trust Section -->
-    <section class="trust-section">
+    <!-- Pricing Section -->
+    <section class="pricing">
         <div class="container">
-            <h2 class="section-title">Why Choose Us</h2>
-            <div class="trust-content">
-                <p>At BrightStar Solutions, we've been delivering exceptional results for over a decade. Our commitment to excellence, integrity, and customer satisfaction has made us a trusted name in the industry. When you work with us, you're not just getting a service provider – you're gaining a partner dedicated to your success.</p>
+            <h2 class="section-title">Web Development Packages</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">Starter Website</h3>
+                        <div class="pricing-price">$1,499<span></span></div>
+                        <p class="pricing-desc">Perfect for small businesses getting started online</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 5 Custom Designed Pages</li>
+                            <li><i class="fas fa-check-circle"></i> Mobile Responsive Design</li>
+                            <li><i class="fas fa-check-circle"></i> Basic SEO Optimization</li>
+                            <li><i class="fas fa-check-circle"></i> Contact Form</li>
+                            <li><i class="fas fa-check-circle"></i> Social Media Integration</li>
+                            <li><i class="fas fa-check-circle"></i> 2 Rounds of Revisions</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="#contact" class="btn">Get Started</a>
+                    </div>
+                </div>
                 
-                <div class="trust-badges">
-                    <div class="badge">
-                        <i class="fas fa-award"></i>
-                        <h3>Quality Guaranteed</h3>
-                        <p>Premium solutions</p>
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">Business Website</h3>
+                        <div class="pricing-price">$2,499<span></span></div>
+                        <p class="pricing-desc">Ideal for growing businesses needing more features</p>
                     </div>
-                    <div class="badge">
-                        <i class="fas fa-users"></i>
-                        <h3>Customer Focused</h3>
-                        <p>Your success first</p>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Everything in Starter, plus:</li>
+                            <li><i class="fas fa-check-circle"></i> Up to 10 Custom Pages</li>
+                            <li><i class="fas fa-check-circle"></i> CMS Integration (WordPress)</li>
+                            <li><i class="fas fa-check-circle"></i> Advanced SEO Setup</li>
+                            <li><i class="fas fa-check-circle"></i> Blog Integration</li>
+                            <li><i class="fas fa-check-circle"></i> Google Analytics Setup</li>
+                            <li><i class="fas fa-check-circle"></i> 3 Rounds of Revisions</li>
+                        </ul>
                     </div>
-                    <div class="badge">
-                        <i class="fas fa-handshake"></i>
-                        <h3>Trusted Partner</h3>
-                        <p>Reliable & dependable</p>
+                    <div class="pricing-cta">
+                        <a href="#contact" class="btn">Get Started</a>
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">E-Commerce Premium</h3>
+                        <div class="pricing-price">$3,999<span></span></div>
+                        <p class="pricing-desc">Complete online store solution for serious businesses</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Everything in Business, plus:</li>
+                            <li><i class="fas fa-check-circle"></i> E-Commerce Functionality</li>
+                            <li><i class="fas fa-check-circle"></i> Product Catalog (up to 25 products)</li>
+                            <li><i class="fas fa-check-circle"></i> Secure Payment Gateway</li>
+                            <li><i class="fas fa-check-circle"></i> Inventory Management System</li>
+                            <li><i class="fas fa-check-circle"></i> Customer Account Area</li>
+                            <li><i class="fas fa-check-circle"></i> 4 Rounds of Revisions</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="#contact" class="btn">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Website Redesign Section -->
+    <section class="virtual-assistant">
+        <div class="container">
+            <h2 class="section-title">Website Redesign Services</h2>
+            <div class="va-container">
+                <p>Already have a website but it's looking outdated? Our redesign services will transform your existing website into a modern, responsive, and effective digital presence that converts visitors into customers.</p>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Basic Redesign</h3>
+                            <div class="pricing-price">$999<span></span></div>
+                            <p class="pricing-desc">Refresh your existing site with a modern look</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Modern Design Update</li>
+                                <li><i class="fas fa-check-circle"></i> Mobile Responsive Conversion</li>
+                                <li><i class="fas fa-check-circle"></i> Content Migration</li>
+                                <li><i class="fas fa-check-circle"></i> Basic SEO Improvements</li>
+                                <li><i class="fas fa-check-circle"></i> 2 Rounds of Revisions</li>
+                                <li><i class="fas fa-check-circle"></i> 2 Week Completion Time</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-cta">
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Complete Redesign</h3>
+                            <div class="pricing-price">$1,899<span></span></div>
+                            <p class="pricing-desc">Total transformation with enhanced functionality</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Everything in Basic, plus:</li>
+                                <li><i class="fas fa-check-circle"></i> Complete Visual Overhaul</li>
+                                <li><i class="fas fa-check-circle"></i> Improved User Experience</li>
+                                <li><i class="fas fa-check-circle"></i> Advanced SEO Optimization</li>
+                                <li><i class="fas fa-check-circle"></i> Performance Optimization</li>
+                                <li><i class="fas fa-check-circle"></i> 3 Rounds of Revisions</li>
+                                <li><i class="fas fa-check-circle"></i> 4 Week Completion Time</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-cta">
+                            <a href="#contact" class="btn">Learn More</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services">
+    <!-- Virtual Assistant Section -->
+    <section class="virtual-assistant">
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>Web Development</h3>
-                    <p>Custom websites and web applications tailored to your business needs.</p>
+            <h2 class="section-title">24/7 Virtual Phone Assistance</h2>
+            <div class="va-container">
+                <p>Never miss a customer call again! Our virtual phone assistance service ensures your business is always available to customers, providing professional call handling even after hours.</p>
+                
+                <div class="va-plans">
+                    <div class="va-plan">
+                        <h3>Basic Plan</h3>
+                        <div class="va-price">$89<span>/month</span></div>
+                        <ul>
+                            <li>Up to 100 call minutes</li>
+                            <li>Basic call screening</li>
+                            <li>Message taking service</li>
+                            <li>Email notifications</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="va-plan">
+                        <h3>Professional Plan</h3>
+                        <div class="va-price">$119<span>/month</span></div>
+                        <ul>
+                            <li>Up to 300 call minutes</li>
+                            <li>Advanced call screening</li>
+                            <li>Appointment scheduling</li>
+                            <li>Basic customer support</li>
+                            <li>SMS notifications</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="va-plan">
+                        <h3>6-Month Premium</h3>
+                        <div class="va-price">$599<span>/one-time</span></div>
+                        <div class="va-savings">Save $115</div>
+                        <ul>
+                            <li>All Professional features</li>
+                            <li>Unlimited call minutes</li>
+                            <li>24/7 live support</li>
+                            <li>Priority call handling</li>
+                            <li>Custom call scripts</li>
+                            <li>Monthly performance reports</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Mobile Apps</h3>
-                    <p>iOS and Android applications designed for optimal user experience.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Digital Marketing</h3>
-                    <p>Strategies to increase your online visibility and grow your business.</p>
-                </div>
+                
+                <p style="text-align: center; margin-top: 2rem;"><small>All plans include setup and training. Volume-based discounts available for businesses with higher call volumes.</small></p>
             </div>
         </div>
     </section>
@@ -445,7 +646,7 @@
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2023 BrightStar Solutions. All rights reserved.</p>
-                <p>Designed with <i class="fas fa-heart" style="color: #ff6600;"></i> for our clients</p>
+                <p>Professional web solutions at competitive prices</p>
             </div>
         </div>
     </footer>
@@ -463,7 +664,7 @@
             }, { threshold: 0.1 });
             
             // Observe elements to animate
-            const elementsToAnimate = document.querySelectorAll('.service-card, .badge, .trust-content');
+            const elementsToAnimate = document.querySelectorAll('.pricing-card, .va-plan');
             elementsToAnimate.forEach(element => {
                 element.style.opacity = 0;
                 element.style.transform = 'translateY(20px)';
