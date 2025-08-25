@@ -1,96 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BrightStar Solutions</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<style>
-body { font-family: 'Roboto', Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
-
-/* Header / Banner */
-header {
-  background-image: url('banner.jpg');
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  text-align: center;
-  padding: 120px 20px;
-  position: relative;
-}
-header::after {
-  content: "";
-  position: absolute;
-  top:0; left:0; width:100%; height:100%;
-  background: rgba(0,0,0,0.45);
-}
-header h1, header p { position: relative; z-index:1; margin:0; }
-header h1 { font-size:3em; margin-bottom:15px; }
-header p { font-size:1.2em; }
-
-/* Navigation */
-nav { display:flex; justify-content:center; background:#222; }
-nav a { color:#fff; padding:15px 20px; text-decoration:none; font-weight:700; transition:0.3s; }
-nav a:hover { background:#ff6600; color:#fff; border-radius:5px; }
-
-/* Sections */
-section { padding:50px 20px; max-width:900px; margin:30px auto; background:#fff; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-section h2 { font-size:2em; margin-bottom:20px; }
-section p { font-size:1em; line-height:1.6; }
-
-/* Contact Form */
-form label { display:block; margin-top:15px; font-weight:700; }
-form input, form textarea { width:100%; padding:12px; margin-top:5px; border:1px solid #ccc; border-radius:8px; }
-form button { margin-top:20px; padding:12px 30px; background:#ff6600; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:1em; transition:0.3s; }
-form button:hover { background:#e65c00; }
-
-/* Footer */
-footer { background:#222; color:#fff; text-align:center; padding:25px 20px; }
-footer a { color:#ffcc00; text-decoration:none; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrightStar Solutions - Professional Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #0052a3;
+            --secondary: #ff6600;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --success: #28a745;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-text span {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background: #e55c00;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Trust Section */
+        .trust-section {
+            background: var(--white);
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+        }
+        
+        .trust-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--light);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .trust-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            width: 180px;
+            transition: var(--transition);
+        }
+        
+        .badge:hover {
+            transform: translateY(-10px);
+        }
+        
+        .badge i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .badge h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-info {
+            background: var(--primary);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+        
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-details p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-details i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            color: var(--primary);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--white);
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .trust-content {
+                padding: 2rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-star logo-icon"></i>
+                    <div class="logo-text">Bright<span>Star</span> Solutions</div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<header>
-<h1>Shine Bright with BrightStar Solutions</h1>
-<p>Your Path to Online Success</p>
-<p>Contact us: 📞 +1 (865) 290-0478 | ✉️ <a href="mailto:brightstarowner@gmail.com">brightstarowner@gmail.com</a></p>
-</header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Excellence in Every Solution</h1>
+                <p>Your trusted partner for innovative business solutions</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </div>
+    </section>
 
-<nav>
-<a href="#home">Home</a>
-<a href="#services">Our Services</a>
-<a href="#contact">Contact</a>
-</nav>
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="trust-content">
+                <p>At BrightStar Solutions, we've been delivering exceptional results for over a decade. Our commitment to excellence, integrity, and customer satisfaction has made us a trusted name in the industry. When you work with us, you're not just getting a service provider – you're gaining a partner dedicated to your success.</p>
+                
+                <div class="trust-badges">
+                    <div class="badge">
+                        <i class="fas fa-award"></i>
+                        <h3>Quality Guaranteed</h3>
+                        <p>Premium solutions</p>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-users"></i>
+                        <h3>Customer Focused</h3>
+                        <p>Your success first</p>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Trusted Partner</h3>
+                        <p>Reliable & dependable</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="services">
-<h2>Our Services</h2>
-<p>We offer virtual assistant coverage 24/7 to ensure your business stays connected and never misses a call.</p>
-</section>
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Web Development</h3>
+                    <p>Custom websites and web applications tailored to your business needs.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Apps</h3>
+                    <p>iOS and Android applications designed for optimal user experience.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Digital Marketing</h3>
+                    <p>Strategies to increase your online visibility and grow your business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="contact">
-<h2>Contact Us</h2>
-<p>Owner: Chris Cassidy</p>
-<p>Phone: <a href="tel:+18652900478">+1 (865) 290-0478</a></p>
-<p>Email: <a href="mailto:brightstarowner@gmail.com">brightstarowner@gmail.com</a></p>
-<form>
-<label for="name">Name</label>
-<input type="text" id="name" name="name" required>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-phone"></i> 1 (865) 290-0478</p>
+                        <p><i class="fas fa-envelope"></i> brightstarowner@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Serving clients nationwide</p>
+                    </div>
+                    
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<label for="email">Email</label>
-<input type="email" id="email" name="email" required>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2023 BrightStar Solutions. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart" style="color: #ff6600;"></i> for our clients</p>
+            </div>
+        </div>
+    </footer>
 
-<label for="message">Message</label>
-<textarea id="message" name="message" required></textarea>
-
-<button type="submit">Send</button>
-</form>
-</section>
-
-<footer>
-<p>&copy; 2025 BrightStar Solutions | Owner: Chris Cassidy</p>
-<p>📞 <a href="tel:+18652900478">+1 (865) 290-0478</a> | ✉️ <a href="mailto:brightstarowner@gmail.com">brightstarowner@gmail.com</a></p>
-</footer>
-
+    <script>
+        // Simple animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe elements to animate
+            const elementsToAnimate = document.querySelectorAll('.service-card, .badge, .trust-content');
+            elementsToAnimate.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                observer.observe(element);
+            });
+            
+            // Update year in footer
+            document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} BrightStar Solutions. All rights reserved.`;
+        });
+    </script>
 </body>
 </html>
